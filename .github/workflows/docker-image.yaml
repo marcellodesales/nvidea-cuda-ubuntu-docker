@@ -164,6 +164,7 @@ jobs:
           echo "Output key: needs.setup.outputs.defaultDockerImageRepo=${{needs.setup.outputs.defaultDockerImageRepo}}"
           echo "Output key: needs.setup.outputs.defaultDockerImageVersion=${{needs.setup.outputs.defaultDockerImageVersion}}"
           echo "Output key: needs.setup.outputs.defaultDockerImageBranchTag=${{needs.setup.outputs.defaultDockerImageBranchTag}}"
+          echo "Output key: needs.setup.outputs.defaultDockerImageBranchShaTag=${{needs.setup.outputs.defaultDockerImageBranchShaTag}}"
           echo "Output key: needs.setup.outputs.defaultPublicDockerImageRepo=${{needs.setup.outputs.defaultPublicDockerImageRepo}}:latest"
 
       # https://github.com/marcellodesales/cloner/packages?package_type=Docker
@@ -195,6 +196,9 @@ jobs:
 
           docker tag ${{needs.setup.outputs.defaultDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageVersion}} ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageVersion}}
           docker push ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageVersion}}
+
+          docker tag ${{needs.setup.outputs.defaultDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageVersion}} ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageBranchShaTag}}
+          docker push ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageBranchShaTag}}
 
           docker tag ${{needs.setup.outputs.defaultDockerImageRepo}}:${{needs.setup.outputs.defaultDockerImageVersion}} ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:latest
           docker push ${{needs.setup.outputs.defaultPublicDockerImageRepo}}:latest
